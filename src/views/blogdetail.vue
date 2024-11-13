@@ -35,7 +35,7 @@ export default {
   props: ["id"],
   data() {
     return {
-      blog: nyyull
+      blog: null
     };
   },
   mounted() {
