@@ -28,6 +28,7 @@
 
 <script>
 import Navbar from "@/components/Navbar.vue";
+import axios from "axios";
 export default {
   components: {
     Navbar
@@ -44,15 +45,16 @@ export default {
       .then(data => (this.blog = data));
   },
   methods:{
-    deleteblog(id){
-      console.log(123);
-      fetch('http://localhost:3000/blogs/'+ id,{
-        method:'DELETE'
-      })
-      .then(res=> res.json())
-      .then(data => 
-        this.$router.push({name: "home"})
-      )
+    async deleteblog(id){
+      try{
+        const res = await axios.delete(`http://localhost:3000/blogs/${id}`)
+        if(res){
+          this.$router.push('/')
+          alert('blog deleted successfully');
+        }
+      }catch(err){
+        console.log(err);
+      }
     }
   }
 };

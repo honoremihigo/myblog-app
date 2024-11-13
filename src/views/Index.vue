@@ -19,6 +19,7 @@
 <script>
 import Nav from '@/components/Navbar.vue'
 import Footer from "@/components/footer.vue"
+import axios from 'axios';
 export default {
 components:{
     Nav,
@@ -29,11 +30,13 @@ data() {
         blogs:[]
     }
 },
-mounted(){
-    fetch('http://localhost:3000/blogs')
-    .then(res => res.json())
-    .then(data => this.blogs = data.reverse())
-    .catch(err => console.log(err))
+async mounted(){
+    try{
+        const res = await axios.get('http://localhost:3000/blogs')
+        this.blogs = res.data
+    }catch(err){
+        console.log("the error is:",err)
+    }
 }
 }
 </script>
