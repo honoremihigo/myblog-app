@@ -33,7 +33,7 @@ data() {
 async mounted(){
     try{
         const res = await axios.get('http://localhost:3000/blogs')
-        this.blogs = res.data
+        this.blogs = res.data.reverse()
     }catch(err){
         console.log("the error is:",err)
     }
